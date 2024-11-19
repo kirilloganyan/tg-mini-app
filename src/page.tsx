@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserDashboard from './pages/UserDashboard';
 import ContractsPage from './pages/ContractsPage';
-import SidebarMenu from './components/SidebarMenu';
+import SidebarMenu from './components/SidebarMenu.jsx';
 import './global.css';
 import WalletPage from "./pages/walletPage";
 import InfoPage from "./pages/InfoPage";

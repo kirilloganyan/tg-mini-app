@@ -7,19 +7,25 @@ const SidebarMenu = () => {
     const toggleSidebar = () => {
         setIsVisible(!isVisible);
     };
+    const tg = window.Telegram.WebApp;
+    const onClose = () => {
+        tg.close();
+
+    }
 
     return (
-        <div style={styles.container as any}>
-            <button onClick={toggleSidebar} style={styles.toggleButton as any}>
+        <div style={styles.container}>
+            <button onClick={onClose}>{tg.initDataUnsafe?.user?.username}</button>
+            <button onClick={toggleSidebar} style={styles.toggleButton}>
                 {isVisible ? '<' : '>'}
             </button>
             <div
                 style={{
-                    ...styles.sidebar  as any,
+                    ...styles.sidebar,
                     transform: isVisible ? 'translateX(0)' : 'translateX(-100%)',
                 }}
             >
-                <div style={styles.userInfo as any}>
+                <div style={styles.userInfo}>
                     <p style={styles.username}>ogheng</p>
                 </div>
                 <div style={styles.menu}>
