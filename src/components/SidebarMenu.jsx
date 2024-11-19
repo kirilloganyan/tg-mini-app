@@ -7,15 +7,9 @@ const SidebarMenu = () => {
     const toggleSidebar = () => {
         setIsVisible(!isVisible);
     };
-    const tg = window.Telegram.WebApp;
-    const onClose = () => {
-        tg.close();
-
-    }
 
     return (
         <div style={styles.container}>
-            <button onClick={onClose}>{tg.initDataUnsafe?.user?.username}</button>
             <button onClick={toggleSidebar} style={styles.toggleButton}>
                 {isVisible ? '<' : '>'}
             </button>

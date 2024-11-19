@@ -1,12 +1,13 @@
 import {ButtonWithHover} from "../components/ButtonWithHover";
 
 const WalletPage = () => {
+    const tg = window.Telegram.WebApp;
     return (
-        <div style={styles.container as any}>
+        <div style={styles.container}>
             <h2 style={styles.title}>Ваш Кошелек</h2>
             <div style={styles.userInfo}>
                 <h3 style={styles.cardTitle}>Информация о пользователе</h3>
-                <p style={styles.infoText}>Имя: ogheng</p>
+                <p style={styles.infoText}>Имя: ${tg.initDataUnsafe?.user?.username}</p>
                 <p style={styles.infoText}>Баланс: ₽10,000</p>
             </div>
             <ButtonWithHover style={styles.button}>Вывести средства</ButtonWithHover>

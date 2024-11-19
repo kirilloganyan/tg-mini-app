@@ -2,14 +2,14 @@ import {ButtonWithHover} from "../components/ButtonWithHover";
 
 const UserDashboard = () => {
     return (
-        <div style={styles.container as any}>
+        <div style={styles.container}>
             <h2 style={styles.title}>Панель пользователя</h2>
-            <div style={styles.card as any}>
+            <div style={styles.card}>
                 <h3 style={styles.cardTitle}>Ваш баланс</h3>
                 <p style={styles.balance}>₽10,000</p>
                 <ButtonWithHover style={styles.button}>Пополнить баланс</ButtonWithHover>
             </div>
-            <div style={styles.promoSection as any}>
+            <div style={styles.promoSection}>
                 <p style={styles.promoText}>Специальное предложение!</p>
                 <ButtonWithHover style={styles.button}>Узнать больше</ButtonWithHover>
             </div>

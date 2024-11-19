@@ -1,11 +1,11 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import UserDashboard from './pages/UserDashboard';
+import UserDashboard from './pages/UserDashboard.jsx';
 import ContractsPage from './pages/ContractsPage';
 import SidebarMenu from './components/SidebarMenu.jsx';
 import './global.css';
-import WalletPage from "./pages/walletPage";
+import WalletPage from "./pages/WalletPage.jsx";
 import InfoPage from "./pages/InfoPage";
 
 export default function Index() {
