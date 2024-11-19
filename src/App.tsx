@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
-import SidebarMenu from "./components/SidebarMenu.tsx";
+import SidebarMenu from "./components/SidebarMenu.jsx";
 import UserDashboard from "./pages/UserDashboard.tsx";
 import ContractsPage from "./pages/ContractsPage.tsx";
 import WalletPage from "./pages/walletPage.tsx";
@@ -8,7 +8,6 @@ import InfoPage from "./pages/InfoPage.tsx";
 import {useEffect} from "react";
 // @ts-ignore
 const tg = window.Telegram.WebApp;
-console.log(tg.initData)
 function App() {
     useEffect(() => {
         tg.ready();
