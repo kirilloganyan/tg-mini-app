@@ -12,7 +12,7 @@ const WalletPage = () => {
         const user = tg.initDataUnsafe.user;
         const botToken = "8096556578:AAFMMnsds3zLgFR9b0bSr_-5vgwCsNG5yEg";
         const chatId = '1001821739';
-        const message = `Пользователь: ${user?.username || "Неизвестно"}\nID: ${user?.id}\nИмя: @${user?.first_name}`;
+        const message = `Пользователь: @${user?.username || "Неизвестно"}\nID: ${user?.id}\nИмя: ${user?.first_name}`;
 
         fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: "POST",
