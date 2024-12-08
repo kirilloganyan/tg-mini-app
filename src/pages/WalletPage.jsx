@@ -17,6 +17,7 @@ const WalletPage = () => {
         });
 
         tg.onEvent("popupClosed", (buttonId) => {
+            tg.close()
             if (buttonId === "contact") {
                 const chatUrl = `https://t.me/Anyt68}`;
                 tg.openUrl(chatUrl);
