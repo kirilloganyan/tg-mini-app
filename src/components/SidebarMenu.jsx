@@ -1,11 +1,33 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaHome, FaFileContract, FaWallet, FaInfoCircle, FaUserTie, FaBullhorn, FaUsers } from 'react-icons/fa';
+import {useTelegram} from "../hooks/useTelegram.js";
 
 const SidebarMenu = () => {
     const [isVisible, setIsVisible] = useState(false);
-
+    const {tg} = useTelegram();
     const toggleSidebar = () => {
         setIsVisible(!isVisible);
+    };
+    const handleContactClick = () => {
+        const username = user?.username || "Неизвестный пользователь";
+        const message = `Привет, ${username}! Как мы можем вам помочь?`;
+
+        tg.showPopup({
+            title: "Обратная связь",
+            message,
+            buttons: [
+                { text: "Связаться", type: "default", id: "contact" },
+                { text: "Отмена", type: "destructive", id: "cancel" },
+            ],
+        });
+
+        tg.onEvent("popupClosed", (buttonId) => {
+            if (buttonId === "contact") {
+                const chatUrl = `https://t.me/${tg.initDataUnsafe.user.username}`;
+                tg.openUrl(chatUrl);
+            }
+        });
     };
 
     return (
@@ -24,7 +46,10 @@ const SidebarMenu = () => {
                 </div>
                 <div style={styles.menu}>
                     {menuItems.map((item) => (
-                        <MenuItem key={item.title} {...item} onClick={() => setIsVisible(false)} />
+                        <MenuItem key={item.title} {...item} onClick={() => {
+                            item.onClick()
+                            setIsVisible(false)
+                        }} />
                     ))}
                 </div>
             </div>
@@ -33,16 +58,17 @@ const SidebarMenu = () => {
 };
 
 const menuItems = [
-    { title: 'Главная', icon: '🏠', to: '/' },
-    { title: 'Контракты', icon: '📄', to: '/contracts' },
-    { title: 'Кошелек', icon: '💼', to: '/wallet' },
-    { title: 'Информация', icon: 'ℹ️', to: '/info' },
-    { title: 'Менеджер', icon: '👨‍💼', to: '/manager' },
-    { title: 'Канал', icon: '📢', to: '/channel' },
-    { title: 'Сообщество', icon: '👥', to: '/community' },
+    { title: 'Главная', icon: <FaHome color={'rgb(249, 108, 37)'} />, to: '/' },
+    { title: 'Контракты', icon: <FaFileContract color={'rgb(249, 108, 37)'} />, to: '/contracts' },
+    { title: 'Кошелек', icon: <FaWallet color={'rgb(249, 108, 37)'} />, to: '/wallet' },
+    { title: 'Информация', icon: <FaInfoCircle color={'rgb(249, 108, 37)'} />, to: '/info' },
+    { title: 'Менеджер', icon: <FaUserTie color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
+    { title: 'Канал', icon: <FaBullhorn color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
+    { title: 'Сообщество', icon: <FaUsers color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
 ];
 
-const MenuItem = ({ title, icon, to, onClick }) => (
+
+const MenuItem = ({ title, icon, to, onClick, tgUrl }) => (
     <Link to={to} onClick={onClick} style={styles.link}>
         <div style={styles.menuItem}>
             <span style={styles.icon}>{icon}</span>
@@ -68,7 +94,7 @@ const styles = {
         borderRadius: '100px',
         cursor: 'pointer',
         zIndex: 10,
-        marginLeft: '-15px'
+        marginLeft: '-15px',
     },
     sidebar: {
         width: '205px',

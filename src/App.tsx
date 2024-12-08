@@ -2,9 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
 import SidebarMenu from "./components/SidebarMenu.jsx";
 import UserDashboard from "./pages/UserDashboard.jsx";
-import ContractsPage from "./pages/ContractsPage.tsx";
+import ContractsPage from "./pages/ContractsPage.jsx";
 import WalletPage from "./pages/WalletPage.jsx";
-import InfoPage from "./pages/InfoPage.tsx";
+import InfoPage from "./pages/InfoPage.jsx";
 import {useEffect} from "react";
 // @ts-ignore
 const tg = window.Telegram.WebApp;

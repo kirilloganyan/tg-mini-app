@@ -2,11 +2,11 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserDashboard from './pages/UserDashboard.jsx';
-import ContractsPage from './pages/ContractsPage';
+import ContractsPage from './pages/ContractsPage.jsx';
 import SidebarMenu from './components/SidebarMenu.jsx';
 import './global.css';
 import WalletPage from "./pages/WalletPage.jsx";
-import InfoPage from "./pages/InfoPage";
+import InfoPage from "./pages/InfoPage.jsx";
 
 export default function Index() {
     const [isClient, setIsClient] = useState(false);
