@@ -23,9 +23,9 @@ const SidebarMenu = () => {
         { title: 'Контракты', icon: <FaFileContract color={'rgb(249, 108, 37)'} />, to: '/contracts' },
         { title: 'Кошелек', icon: <FaWallet color={'rgb(249, 108, 37)'} />, to: '/wallet' },
         { title: 'Информация', icon: <FaInfoCircle color={'rgb(249, 108, 37)'} />, to: '/info' },
-        { title: 'Менеджер', icon: <FaUserTie color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
-        { title: 'Канал', icon: <FaBullhorn color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
-        { title: 'Сообщество', icon: <FaUsers color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
+        { title: 'Менеджер', icon: <FaUserTie color={'rgb(249, 108, 37)'} />, },
+        { title: 'Канал', icon: <FaBullhorn color={'rgb(249, 108, 37)'} />, },
+        { title: 'Сообщество', icon: <FaUsers color={'rgb(249, 108, 37)'} />,},
     ];
 
     return (
