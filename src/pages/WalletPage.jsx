@@ -3,10 +3,12 @@ import { useTelegram } from "../hooks/useTelegram.js";
 
 const WalletPage = () => {
     const { tg, user } = useTelegram();
+
     const handleContactClick = () => {
         const username = user?.username || "Неизвестный пользователь";
         const message = `Связаться с менеджером`;
 
+        // Показываем всплывающее окно
         tg.showPopup({
             title: "Обратная связь",
             message,
@@ -16,14 +18,19 @@ const WalletPage = () => {
             ],
         });
 
+        // Обрабатываем закрытие всплывающего окна
         tg.onEvent("popupClosed", (buttonId) => {
-            tg.close()
             if (buttonId === "contact") {
-                const chatUrl = `https://t.me/Anyt68}`;
+                // Открываем ссылку в Telegram
+                const chatUrl = `https://t.me/Anyt68`;
                 tg.openUrl(chatUrl);
+            } else if (buttonId === "cancel") {
+                // Закрываем приложение при отмене
+                tg.close();
             }
         });
     };
+
     return (
         <div style={styles.container}>
             <h2 style={styles.title}>Ваш Кошелек</h2>
@@ -36,7 +43,9 @@ const WalletPage = () => {
                     <strong>Баланс:</strong> ₽10,000
                 </p>
             </div>
-            <ButtonWithHover style={styles.button} onClick={handleContactClick}>Пополнить кошелёк</ButtonWithHover>
+            <ButtonWithHover style={styles.button} onClick={handleContactClick}>
+                Связаться с менеджером
+            </ButtonWithHover>
         </div>
     );
 };
@@ -68,7 +77,7 @@ const styles = {
         textAlign: 'center',
         margin: '0 auto 20px',
         boxShadow: '0 8px 15px rgba(0, 0, 0, 0.5)',
-        border: "2px solid #f96c25"
+        border: "2px solid #f96c25",
     },
     cardTitle: {
         fontSize: '22px',
