@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaFileContract, FaWallet, FaInfoCircle, FaUserTie, FaBullhorn, FaUsers } from 'react-icons/fa';
 import {useTelegram} from "../hooks/useTelegram.js";
@@ -9,25 +9,14 @@ const SidebarMenu = () => {
     const toggleSidebar = () => {
         setIsVisible(!isVisible);
     };
-    const handleContactClick = () => {
-        const username = user?.username || "Неизвестный пользователь";
-        const message = `Привет, ${username}! Как мы можем вам помочь?`;
+    useEffect(() => {
+        tg.ready();
+    }, []);
 
-        tg.showPopup({
-            title: "Обратная связь",
-            message,
-            buttons: [
-                { text: "Связаться", type: "default", id: "contact" },
-                { text: "Отмена", type: "destructive", id: "cancel" },
-            ],
-        });
-
-        tg.onEvent("popupClosed", (buttonId) => {
-            if (buttonId === "contact") {
-                const chatUrl = `https://t.me/${tg.initDataUnsafe.user.username}`;
-                tg.openUrl(chatUrl);
-            }
-        });
+    const openChannel = () => {
+        const tg = window.Telegram.WebApp;
+        const channelUrl = "/https://t.me/telegrachan";
+        tg.openUrl(channelUrl);
     };
     const menuItems = [
         { title: 'Главная', icon: <FaHome color={'rgb(249, 108, 37)'} />, to: '/' },
@@ -60,6 +49,7 @@ const SidebarMenu = () => {
                             setIsVisible(false)
                         }} />
                     ))}
+                    <MenuItem title={'Канал'} icon={<FaBullhorn color={'rgb(249, 108, 37)'} />} onClick={openChannel}/>
                 </div>
             </div>
         </div>
