@@ -57,12 +57,12 @@ const SidebarMenu = () => {
 };
 
 const MenuItem = ({ title, icon, to, onClick, tgUrl }) => (
-    <Link to={to} onClick={onClick} style={styles.link}>
+    <button to={to} onClick={onClick} style={styles.link}>
         <div style={styles.menuItem}>
             <span style={styles.icon}>{icon}</span>
             <p>{title}</p>
         </div>
-    </Link>
+    </>
 );
 
 const styles = {
