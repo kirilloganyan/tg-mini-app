@@ -56,7 +56,7 @@ const SidebarMenu = () => {
                 <div style={styles.menu}>
                     {menuItems.map((item) => (
                         <MenuItem key={item.title} {...item} onClick={() => {
-                            item.onClick()
+                            item?.onClick()
                             setIsVisible(false)
                         }} />
                     ))}

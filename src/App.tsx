@@ -12,6 +12,7 @@ function App() {
     useEffect(() => {
         tg.ready();
     }, [])
+
     return (
         <Router>
             <div style={styles.container}>
