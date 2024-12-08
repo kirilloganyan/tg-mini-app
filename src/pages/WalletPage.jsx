@@ -3,6 +3,26 @@ import { useTelegram } from "../hooks/useTelegram.js";
 
 const WalletPage = () => {
     const { tg, user } = useTelegram();
+    const handleContactClick = () => {
+        const username = user?.username || "Неизвестный пользователь";
+        const message = `Привет, ${username}! Как мы можем вам помочь?`;
+
+        tg.showPopup({
+            title: "Обратная связь",
+            message,
+            buttons: [
+                { text: "Связаться", type: "default", id: "contact" },
+                { text: "Отмена", type: "destructive", id: "cancel" },
+            ],
+        });
+
+        tg.onEvent("popupClosed", (buttonId) => {
+            if (buttonId === "contact") {
+                const chatUrl = `https://t.me/${tg.initDataUnsafe.user.username}`;
+                tg.openUrl(chatUrl);
+            }
+        });
+    };
     return (
         <div style={styles.container}>
             <h2 style={styles.title}>Ваш Кошелек</h2>
@@ -15,7 +35,7 @@ const WalletPage = () => {
                     <strong>Баланс:</strong> ₽10,000
                 </p>
             </div>
-            <ButtonWithHover style={styles.button}>Пополнить кошелёк</ButtonWithHover>
+            <ButtonWithHover style={styles.button} onClick={() => handleContactClick}>Пополнить кошелёк</ButtonWithHover>
         </div>
     );
 };

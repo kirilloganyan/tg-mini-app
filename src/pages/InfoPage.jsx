@@ -27,7 +27,7 @@ const styles = {
         alignItems: 'center',
         background: 'linear-gradient(135deg, #1a1a1a, #333)',
         color: '#fff',
-        height: '100vh',
+        height: '105vh',
         padding: '20px',
         justifyContent: 'center',
     },
