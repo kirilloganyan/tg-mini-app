@@ -29,6 +29,9 @@ const WalletPage = () => {
             }
         });
     };
+    const onClose = () => {
+        tg.close();
+    }
 
     return (
         <div style={styles.container}>
@@ -42,7 +45,7 @@ const WalletPage = () => {
                     <strong>Баланс:</strong> ₽10,000
                 </p>
             </div>
-            <ButtonWithHover style={styles.button} onClick={() => handleContactClick}>
+            <ButtonWithHover style={styles.button} onClick={onClose}>
                 Связаться с менеджером
             </ButtonWithHover>
         </div>
