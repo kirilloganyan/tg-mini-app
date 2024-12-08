@@ -22,11 +22,9 @@ const WalletPage = () => {
 
         tg.onEvent("popupClosed", (buttonId) => {
             if (buttonId === "contact") {
-                // Открываем ссылку в Telegram
-                const chatUrl = `https://t.me/Anyt68`;
+                const chatUrl = `https://t.me/@Anyt68`;
                 tg.openUrl(chatUrl);
             } else if (buttonId === "cancel") {
-                // Закрываем приложение при отмене
                 tg.close();
             }
         });
@@ -44,7 +42,7 @@ const WalletPage = () => {
                     <strong>Баланс:</strong> ₽10,000
                 </p>
             </div>
-            <ButtonWithHover style={styles.button} onClick={handleContactClick}>
+            <ButtonWithHover style={styles.button} onClick={() => handleContactClick}>
                 Связаться с менеджером
             </ButtonWithHover>
         </div>
