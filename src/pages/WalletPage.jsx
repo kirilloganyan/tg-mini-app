@@ -35,7 +35,7 @@ const WalletPage = () => {
                     <strong>Баланс:</strong> ₽10,000
                 </p>
             </div>
-            <ButtonWithHover style={styles.button} onClick={() => handleContactClick}>Пополнить кошелёк</ButtonWithHover>
+            <ButtonWithHover style={styles.button} onClick={handleContactClick}>Пополнить кошелёк</ButtonWithHover>
         </div>
     );
 };
