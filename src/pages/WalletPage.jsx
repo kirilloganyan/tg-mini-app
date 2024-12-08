@@ -8,7 +8,6 @@ const WalletPage = () => {
         const username = user?.username || "Неизвестный пользователь";
         const message = `Связаться с менеджером`;
 
-        // Показываем всплывающее окно
         tg.showPopup({
             title: "Обратная связь",
             message,
@@ -18,7 +17,6 @@ const WalletPage = () => {
             ],
         });
 
-        // Обрабатываем закрытие всплывающего окна
         tg.onEvent("popupClosed", (buttonId) => {
             if (buttonId === "contact") {
                 // Открываем ссылку в Telegram
