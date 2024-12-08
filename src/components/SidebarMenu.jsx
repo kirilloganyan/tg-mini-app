@@ -29,6 +29,15 @@ const SidebarMenu = () => {
             }
         });
     };
+    const menuItems = [
+        { title: 'Главная', icon: <FaHome color={'rgb(249, 108, 37)'} />, to: '/' },
+        { title: 'Контракты', icon: <FaFileContract color={'rgb(249, 108, 37)'} />, to: '/contracts' },
+        { title: 'Кошелек', icon: <FaWallet color={'rgb(249, 108, 37)'} />, to: '/wallet' },
+        { title: 'Информация', icon: <FaInfoCircle color={'rgb(249, 108, 37)'} />, to: '/info' },
+        { title: 'Менеджер', icon: <FaUserTie color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
+        { title: 'Канал', icon: <FaBullhorn color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
+        { title: 'Сообщество', icon: <FaUsers color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
+    ];
 
     return (
         <div style={styles.container}>
@@ -56,17 +65,6 @@ const SidebarMenu = () => {
         </div>
     );
 };
-
-const menuItems = [
-    { title: 'Главная', icon: <FaHome color={'rgb(249, 108, 37)'} />, to: '/' },
-    { title: 'Контракты', icon: <FaFileContract color={'rgb(249, 108, 37)'} />, to: '/contracts' },
-    { title: 'Кошелек', icon: <FaWallet color={'rgb(249, 108, 37)'} />, to: '/wallet' },
-    { title: 'Информация', icon: <FaInfoCircle color={'rgb(249, 108, 37)'} />, to: '/info' },
-    { title: 'Менеджер', icon: <FaUserTie color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
-    { title: 'Канал', icon: <FaBullhorn color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
-    { title: 'Сообщество', icon: <FaUsers color={'rgb(249, 108, 37)'} />, onClick: handleContactClick },
-];
-
 
 const MenuItem = ({ title, icon, to, onClick, tgUrl }) => (
     <Link to={to} onClick={onClick} style={styles.link}>
