@@ -5,7 +5,7 @@ const WalletPage = () => {
     const { tg, user } = useTelegram();
     const handleContactClick = () => {
         const username = user?.username || "Неизвестный пользователь";
-        const message = `Привет, ${username}! Как мы можем вам помочь?`;
+        const message = `Связаться с менеджером`;
 
         tg.showPopup({
             title: "Обратная связь",
@@ -18,7 +18,7 @@ const WalletPage = () => {
 
         tg.onEvent("popupClosed", (buttonId) => {
             if (buttonId === "contact") {
-                const chatUrl = `https://t.me/${tg.initDataUnsafe.user.username}`;
+                const chatUrl = `https://t.me/Anyt68}`;
                 tg.openUrl(chatUrl);
             }
         });
