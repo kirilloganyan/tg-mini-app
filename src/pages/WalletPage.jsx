@@ -1,9 +1,12 @@
 import { ButtonWithHover } from "../components/ButtonWithHover";
 import { useTelegram } from "../hooks/useTelegram.js";
+import {useEffect} from "react";
 
 const WalletPage = () => {
     const { tg, user } = useTelegram();
-
+    useEffect(() => {
+        tg.ready();
+    }, []);
     const handleContactClick = () => {
         const username = user?.username || "Неизвестный пользователь";
         const message = `Связаться с менеджером`;
