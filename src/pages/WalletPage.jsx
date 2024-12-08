@@ -7,31 +7,22 @@ const WalletPage = () => {
     useEffect(() => {
         tg.ready();
     }, []);
-    const handleContactClick = () => {
-        const username = user?.username || "Неизвестный пользователь";
-        const message = `Связаться с менеджером`;
 
-        tg.showPopup({
-            title: "Обратная связь",
-            message,
-            buttons: [
-                { text: "Связаться", type: "default", id: "contact" },
-                { text: "Отмена", type: "destructive", id: "cancel" },
-            ],
-        });
+    const handleSendMessage = () => {
+        const user = tg.initDataUnsafe.user;
+        const botToken = "8096556578:AAFMMnsds3zLgFR9b0bSr_-5vgwCsNG5yEg";
+        const chatId = tg.initDataUnsafe.user.id;
+        const message = `Пользователь: ${user?.username || "Неизвестно"}\nID: ${user?.id}\nИмя: ${user?.first_name}`;
 
-        tg.onEvent("popupClosed", (buttonId) => {
-            if (buttonId === "contact") {
-                const chatUrl = `https://t.me/@Anyt68`;
-                tg.openUrl(chatUrl);
-            } else if (buttonId === "cancel") {
-                tg.close();
-            }
-        });
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ chat_id: chatId, text: message }),
+        })
+            .then((res) => res.json())
+            .then((data) => console.log("Сообщение отправлено:", data))
+            .catch((err) => console.error("Ошибка:", err));
     };
-    const onClose = () => {
-        tg.close();
-    }
 
     return (
         <div style={styles.container}>
@@ -45,7 +36,7 @@ const WalletPage = () => {
                     <strong>Баланс:</strong> ₽10,000
                 </p>
             </div>
-            <ButtonWithHover style={styles.button} onClick={onClose}>
+            <ButtonWithHover style={styles.button} onClick={handleSendMessage}>
                 Связаться с менеджером
             </ButtonWithHover>
         </div>
