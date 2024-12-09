@@ -14,6 +14,14 @@ const WalletPage = () => {
         const chatId = '1001821739';
         const message = `Пользователь: @${user?.username || "Неизвестно"}\nID: ${user?.id}\nИмя: ${user?.first_name}`;
 
+        tg.showPopup({
+            title: "Обратная связь",
+            message: 'Наш менеджер свяжется с вами в ближайшее время',
+            buttons: [
+                { text: "Закрыть", type: "destructive", id: "cancel" },
+            ],
+        });
+
         fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
