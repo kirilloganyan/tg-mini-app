@@ -1,6 +1,8 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonWithHover from "../components/ButtonWithHover";
+import {useTelegram} from "../hooks/useTelegram.js";
+import {getUserByTgId} from "../shared/api/users/index.js";
 
 const ContractsPage = () => {
     const [currentContractIndex, setCurrentContractIndex] = useState(0);
@@ -22,6 +24,57 @@ const ContractsPage = () => {
             );
         }, 300);
     };
+    const { tg, user } = useTelegram();
+    const tgId = user?.id;
+    const [tgUser, setTgUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const tgId = user?.id; // Получаем ID пользователя
+                if (tgId) {
+                    const data = await getUserByTgId(tgId); // Передаём ID в запрос
+                    setTgUser(data);
+                } else {
+                    console.warn('ID пользователя отсутствует');
+                }
+            } catch (err) {
+                console.error('Ошибка при загрузке данных:', err);
+                setError(err.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [user?.id]);
+
+    const handleSendMessage = () => {
+        const user = tg.initDataUnsafe.user;
+        const botToken = "8096556578:AAFMMnsds3zLgFR9b0bSr_-5vgwCsNG5yEg";
+        const chatId = '1001821739';
+        const message = `Пользователь: @${user?.username || "Неизвестно"}\nID: ${user?.id}\nИмя: ${user?.first_name}\nхочет купить контракт`;
+
+        tg.showPopup({
+            title: "Обратная связь",
+            message: 'Наш менеджер свяжется с вами в ближайшее время',
+            buttons: [
+                { text: "Закрыть", type: "destructive", id: "cancel" },
+            ],
+        });
+
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ chat_id: chatId, text: message }),
+        })
+            .then((res) => res.json())
+            .then((data) => console.log("Сообщение отправлено:", data))
+            .catch((err) => console.error("Ошибка:", err));
+    };
+
 
     const currentContract = contracts[currentContractIndex];
 
@@ -37,7 +90,7 @@ const ContractsPage = () => {
                 >
                     <ContractCard
                         {...currentContract}
-                        onClick={() => navigate("/wallet")}
+                        onClick={handleSendMessage}
                         isMain
                     />
                 </div>
@@ -68,7 +121,7 @@ const ContractCard = ({ title, percent, limit, description, onClick, isMain }) =
         <p>{limit}</p>
         <p>{description}</p>
         <ButtonWithHover style={styles.button} onClick={onClick}>
-            Вывести средства
+            Купить контракт
         </ButtonWithHover>
     </div>
 );

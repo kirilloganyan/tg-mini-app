@@ -2,12 +2,10 @@ import { ButtonWithHover } from "../components/ButtonWithHover";
 import { useTelegram } from "../hooks/useTelegram.js";
 import {useEffect, useState} from "react";
 import {Api} from "../shared/api/index.js";
+import {getUserByTgId} from "../shared/api/users/index.js";
 
 const WalletPage = () => {
     const { tg, user } = useTelegram();
-    useEffect(() => {
-        tg.ready();
-    }, []);
     const tgId = user?.id;
     const [tgUser, setTgUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -16,12 +14,15 @@ const WalletPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const tgId = user?.id;
+                const tgId = user?.id; // Получаем ID пользователя
                 if (tgId) {
-                    const data = await Api.Users.getUserByTgId(tgId);
+                    const data = await getUserByTgId(tgId); // Передаём ID в запрос
                     setTgUser(data);
+                } else {
+                    console.warn('ID пользователя отсутствует');
                 }
             } catch (err) {
+                console.error('Ошибка при загрузке данных:', err);
                 setError(err.message);
             } finally {
                 setIsLoading(false);
@@ -30,6 +31,7 @@ const WalletPage = () => {
 
         fetchData();
     }, [user?.id]);
+
 
     const handleSendMessage = () => {
         const user = tg.initDataUnsafe.user;
@@ -64,7 +66,7 @@ const WalletPage = () => {
                     <strong>Имя:</strong> {user?.username || "Неизвестно"}
                 </p>
                 <p style={styles.infoText}>
-                    <strong>Баланс:</strong> {tgUser?.money ? `${tgUser.money}₽` : 'Необходимо пополнить баланс'}
+                    <strong>Баланс:</strong> {tgUser?.money ? `${tgUser.money }₽` : 'Необходимо пополнить баланс'}
                 </p>
             </div>
             <ButtonWithHover style={styles.button} onClick={handleSendMessage}>
