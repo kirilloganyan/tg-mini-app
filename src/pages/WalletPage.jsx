@@ -1,12 +1,35 @@
 import { ButtonWithHover } from "../components/ButtonWithHover";
 import { useTelegram } from "../hooks/useTelegram.js";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {Api} from "../shared/api/index.js";
 
 const WalletPage = () => {
     const { tg, user } = useTelegram();
     useEffect(() => {
         tg.ready();
     }, []);
+    const tgId = user?.id;
+    const [tgUser, setTgUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const tgId = user?.id;
+                if (tgId) {
+                    const data = await Api.Users.getUserByTgId(tgId);
+                    setTgUser(data);
+                }
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [user?.id]);
 
     const handleSendMessage = () => {
         const user = tg.initDataUnsafe.user;
@@ -41,7 +64,7 @@ const WalletPage = () => {
                     <strong>Имя:</strong> {user?.username || "Неизвестно"}
                 </p>
                 <p style={styles.infoText}>
-                    <strong>Баланс:</strong> ₽10,000
+                    <strong>Баланс:</strong> {tgUser?.money ? `${tgUser.money}₽` : 'Необходимо пополнить баланс'}
                 </p>
             </div>
             <ButtonWithHover style={styles.button} onClick={handleSendMessage}>
