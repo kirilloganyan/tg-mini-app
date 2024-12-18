@@ -1,13 +1,45 @@
 import { ButtonWithHover } from "../components/ButtonWithHover";
+import {useEffect, useState} from "react";
+import {getUserByTgId} from "../shared/api/users/index.js";
+import {useTelegram} from "../hooks/useTelegram.js";
+import {useNavigate} from "react-router-dom";
 
 const UserDashboard = () => {
+    const { tg, user } = useTelegram();
+    const [tgUser, setTgUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const tgId = user?.id;
+                if (tgId) {
+                    const data = await getUserByTgId(tgId); // Передаём ID в запрос
+                    setTgUser(data);
+                } else {
+                    console.warn('ID пользователя отсутствует');
+                }
+            } catch (err) {
+                console.error('Ошибка при загрузке данных:', err);
+                setError(err.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [user?.id]);
+
     return (
         <div style={styles.container}>
             <h2 style={styles.title}>Панель пользователя</h2>
             <div style={styles.card}>
+
                 <h3 style={styles.cardTitle}>Ваш баланс</h3>
-                <p style={styles.balance}>₽10,000</p>
-                <ButtonWithHover style={styles.button}>Пополнить баланс</ButtonWithHover>
+                <p style={styles.balance}>{tgUser?.money ? `${tgUser.money }₽` : '0₽'}
+                </p>
+                <ButtonWithHover style={styles.button} onClick={() => navigate('/wallet')}>Пополнить баланс</ButtonWithHover>
             </div>
             <div style={styles.promoSection}>
                 <p style={styles.promoText}>Специальное предложение!</p>

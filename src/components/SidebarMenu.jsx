@@ -5,7 +5,7 @@ import {useTelegram} from "../hooks/useTelegram.js";
 
 const SidebarMenu = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const {tg} = useTelegram();
+    const {tg, user} = useTelegram();
     const toggleSidebar = () => {
         setIsVisible(!isVisible);
     };
@@ -40,7 +40,7 @@ const SidebarMenu = () => {
                 }}
             >
                 <div style={styles.userInfo}>
-                    <p style={styles.username}>ogheng</p>
+                    <p style={styles.username}>{user?.name}</p>
                 </div>
                 <div style={styles.menu}>
                     {menuItems.map((item) => (
@@ -49,7 +49,6 @@ const SidebarMenu = () => {
                             setIsVisible(false)
                         }} />
                     ))}
-                    <MenuItem title={'Канал'} icon={<FaBullhorn color={'rgb(249, 108, 37)'} />} onClick={openChannel}/>
                 </div>
             </div>
         </div>
