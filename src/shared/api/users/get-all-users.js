@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function getUsers() {
     try {
-        const response = await axios.get(`http://91.197.98.228:8080/api/user`, {
+        const response = await axios.get(`http://95.163.229.219:8080/api/user`, {
             headers: { 'Content-Type': 'application/json' },
         });
         return response.data;
