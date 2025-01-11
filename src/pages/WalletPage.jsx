@@ -58,7 +58,7 @@ const WalletPage = () => {
 
     return (
         <div style={styles.container}>
-            <h2 style={styles.title}>Ваш Кошелек{user?.id}</h2>
+            <h2 style={styles.title}>Ваш Кошелек{tgUser}</h2>
             <div style={styles.card}>
                 <h3 style={styles.cardTitle}>Информация о пользователе</h3>
                 <p style={styles.infoText}>
