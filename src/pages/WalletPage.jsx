@@ -16,14 +16,19 @@ const WalletPage = () => {
             try {
                 const tgId = user?.id;
                 if (tgId) {
-                    const data = await getUserByTgId(tgId); // Передаём ID в запрос
-                    setTgUser(data);
+                    const data = await getUserByTgId(tgId);
+                    if (data) {
+                        setTgUser(data);
+                    } else {
+                        setError('Не удалось получить данные пользователя');
+                    }
                 } else {
                     console.warn('ID пользователя отсутствует');
+                    setError('ID пользователя отсутствует');
                 }
             } catch (err) {
                 console.error('Ошибка при загрузке данных:', err);
-                setError(err.message);
+                setError('Ошибка при загрузке данных');
             } finally {
                 setIsLoading(false);
             }
@@ -32,6 +37,9 @@ const WalletPage = () => {
         fetchData();
     }, [user?.id]);
 
+    if (error) {
+        return <div style={{ color: 'red' }}>{error}</div>;
+    }
 
     const handleSendMessage = () => {
         const user = tg.initDataUnsafe.user;
