@@ -14,7 +14,7 @@ const WalletPage = () => {
         tg.ready();
         const fetchData = async () => {
             try {
-                const tgId = user?.id;
+                const tgId = 288240324;
                 if (tgId) {
                     const data = await getUserByTgId(tgId);
                     if (data) {
