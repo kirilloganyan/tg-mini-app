@@ -35,15 +35,10 @@ const UserDashboard = () => {
         <div style={styles.container}>
             <h2 style={styles.title}>Панель пользователя</h2>
             <div style={styles.card}>
-
                 <h3 style={styles.cardTitle}>Ваш баланс</h3>
                 <p style={styles.balance}>{tgUser?.money ? `${tgUser.money }₽` : '0₽'}
                 </p>
                 <ButtonWithHover style={styles.button} onClick={() => navigate('/wallet')}>Пополнить баланс</ButtonWithHover>
-            </div>
-            <div style={styles.promoSection}>
-                <p style={styles.promoText}>Специальное предложение!</p>
-                <ButtonWithHover style={styles.button}>Узнать больше</ButtonWithHover>
             </div>
         </div>
     );
