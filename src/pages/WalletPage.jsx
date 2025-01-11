@@ -12,6 +12,9 @@ const WalletPage = () => {
 
     useEffect(() => {
         tg.ready();
+    }, [])
+
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const tgId = 288240324;
