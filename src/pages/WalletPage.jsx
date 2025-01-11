@@ -6,7 +6,6 @@ import {getUserByTgId} from "../shared/api/users/index.js";
 
 const WalletPage = () => {
     const { tg, user } = useTelegram();
-    const tgId = user?.id;
     const [tgUser, setTgUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -14,7 +13,7 @@ const WalletPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const tgId = user?.id; // Получаем ID пользователя
+                const tgId = user?.id;
                 if (tgId) {
                     const data = await getUserByTgId(tgId); // Передаём ID в запрос
                     setTgUser(data);
@@ -59,7 +58,7 @@ const WalletPage = () => {
 
     return (
         <div style={styles.container}>
-            <h2 style={styles.title}>Ваш Кошелек</h2>
+            <h2 style={styles.title}>Ваш Кошелек{user?.id}</h2>
             <div style={styles.card}>
                 <h3 style={styles.cardTitle}>Информация о пользователе</h3>
                 <p style={styles.infoText}>
