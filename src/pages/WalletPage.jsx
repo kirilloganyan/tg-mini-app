@@ -37,10 +37,6 @@ const WalletPage = () => {
         fetchData();
     }, [user?.id]);
 
-    if (error) {
-        return <div style={{ color: 'red' }}>{error}</div>;
-    }
-
     const handleSendMessage = () => {
         const user = tg.initDataUnsafe.user;
         const botToken = "8096556578:AAFMMnsds3zLgFR9b0bSr_-5vgwCsNG5yEg";
