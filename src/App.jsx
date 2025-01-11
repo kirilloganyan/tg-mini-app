@@ -5,8 +5,13 @@ import UserDashboard from "./pages/UserDashboard.jsx";
 import ContractsPage from "./pages/ContractsPage.jsx";
 import WalletPage from "./pages/WalletPage.jsx";
 import InfoPage from "./pages/InfoPage.jsx";
+import {useEffect} from "react";
 
 const tg = window.Telegram.WebApp;
+
+useEffect(() => {
+    tg.ready();
+}, [])
 
 function App() {
     return (
