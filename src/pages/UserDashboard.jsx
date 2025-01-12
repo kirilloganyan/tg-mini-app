@@ -15,7 +15,7 @@ const UserDashboard = () => {
             try {
                 const tgId = user?.id;
                 if (tgId) {
-                    const data = await getUserByTgId(tgId); // Передаём ID в запрос
+                    const data = await getUserByTgId(tgId);
                     setTgUser(data);
                 } else {
                     console.warn('ID пользователя отсутствует');
