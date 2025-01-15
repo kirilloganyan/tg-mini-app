@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function getUserByTgId(id) {
     try {
-        const response = await axios.get(`https://test-pyramid.ru:443/api/user/tg_id/${id}`, {
+        const response = await axios.get(`https://test-pyramid.online:443/api/user/tg_id/${id}`, {
             headers: { 'Content-Type': 'application/json' },
         });
         return response.data;
