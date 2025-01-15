@@ -3,8 +3,7 @@ export default async function handler(req, res) {
         // Получаем путь запроса, удаляя "/api"
         const path = req.url.replace('/api', '');
 
-        // Конечный URL, куда будет направлен запрос
-        const targetUrl = `https://95.163.229.219:8080${path}`;
+        const targetUrl = `https://test-pyramid.online:8080${path}`;
         console.log(`Проксирование запроса на: ${targetUrl}`); // Лог для проверки
 
         const response = await fetch(targetUrl, {
