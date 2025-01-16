@@ -5,7 +5,8 @@ import {useTelegram} from "../hooks/useTelegram.js";
 import {useNavigate} from "react-router-dom";
 
 const UserDashboard = () => {
-    const { tg, user } = useTelegram();
+    const tg = useTelegram();
+    const user = tg.initDataUnsafe?.user;
     const [tgUser, setTgUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);

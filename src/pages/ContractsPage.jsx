@@ -8,7 +8,7 @@ const ContractsPage = () => {
     const [currentContractIndex, setCurrentContractIndex] = useState(0);
     const [animationDirection, setAnimationDirection] = useState("none"); // "left" или "right"
     const navigate = useNavigate();
-
+    const tg = useTelegram();
     const handleNext = () => {
         setAnimationDirection("right");
         setTimeout(() => {
@@ -24,7 +24,7 @@ const ContractsPage = () => {
             );
         }, 300);
     };
-    const { tg, user } = useTelegram();
+    const user = tg.initDataUnsafe?.user
     const tgId = user?.id;
     const [tgUser, setTgUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);

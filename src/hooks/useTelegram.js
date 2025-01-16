@@ -1,8 +1,12 @@
-const tg = window.Telegram.WebApp;
-export function useTelegram() {
+import { useEffect } from "react";
 
-    return {
-        tg,
-        user: tg.initDataUnsafe?.user
-    }
-}
+const useTelegram = () => {
+    useEffect(() => {
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+    }, []);
+
+    return window.Telegram.WebApp;
+};
+
+export default useTelegram;

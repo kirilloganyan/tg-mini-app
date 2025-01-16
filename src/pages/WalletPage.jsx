@@ -5,14 +5,12 @@ import {Api} from "../shared/api/index.js";
 import {getUserByTgId} from "../shared/api/users/index.js";
 
 const WalletPage = () => {
-    const { tg, user } = useTelegram();
+    const tg = useTelegram();
     const [tgUser, setTgUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        tg.ready();
-    }, [])
+    const user = tg.initDataUnsafe?.user;
 
     useEffect(() => {
         const fetchData = async () => {

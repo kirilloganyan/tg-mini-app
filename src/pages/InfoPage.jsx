@@ -1,6 +1,9 @@
 import { ButtonWithHover } from "../components/ButtonWithHover";
+import useTelegram from "../hooks/useTelegram.js";
 
 const InfoPage = () => {
+    const tg = useTelegram();
+
     return (
         <div style={styles.container}>
             <h2 style={styles.title}>Наша Миссия</h2>
