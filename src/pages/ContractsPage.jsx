@@ -13,7 +13,7 @@ const ContractsPage = () => {
         setAnimationDirection("right");
         setTimeout(() => {
             setCurrentContractIndex((prevIndex) => (prevIndex + 1) % contracts.length);
-        }, 300); // Длительность анимации
+        }, 300);
     };
 
     const handlePrev = () => {
@@ -102,16 +102,17 @@ const ContractsPage = () => {
                         &gt;
                     </button>
                 </div>
+                <h6 style={styles.info}>Вывод по всем контрактам возможен полностью с телом пополнения</h6>
             </div>
         </div>
     );
 };
 
 const contracts = [
-    { title: "На 6 месяцев", percent: "2.8% в день", limit: "до 1 000 000 ₽", description: "Реталмент - 48 часов" },
-    { title: "На 4 месяца", percent: "3.4% в день", limit: "до 5 000 000 ₽", description: "Реталмент - 24 часа" },
-    { title: "На 5 месяцев", percent: "3.8% в день", limit: "до 3 000 000 ₽", description: "Реталмент - 24 часа" },
-    { title: "На 3 месяца", percent: "4.2% в день", limit: "до 5 000 000 ₽", description: "Личный менеджер" },
+    {
+        title: "Базовый",
+        percent: "1.4% в день", limit: "от 500₽ до 10000 ₽", description: "Вывод всей суммы понедельник-среда" },
+    { title: "Расширенный", percent: "2,3% в день", limit: "От 10000₽ до 30000₽", description: "Вывод всей суммы понедельник-среда" },
 ];
 
 const ContractCard = ({ title, percent, limit, description, onClick, isMain }) => (
@@ -144,6 +145,12 @@ const styles = {
         marginBottom: "20px",
         color: "#f96c25",
     },
+    info: {
+        fontSize: "28px",
+        fontWeight: "bold",
+        marginTop: "20px",
+        color: "#f96c25",
+    },
     mainContract: {
         position: "relative",
         width: "90%",
@@ -157,7 +164,7 @@ const styles = {
         display: "flex",
         justifyContent: "space-between",
         position: "absolute",
-        top: "50%",
+        top: "35%",
         width: "100%",
         transform: "translateY(-50%)",
     },

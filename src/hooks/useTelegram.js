@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 
-const useTelegram = () => {
+export const useTelegram = () => {
+    const tg = window.Telegram.WebApp;
     useEffect(() => {
-        const tg = window.Telegram.WebApp;
         tg.ready();
     }, []);
 
-    return window.Telegram.WebApp;
+    return tg;
 };
 
-export default useTelegram;

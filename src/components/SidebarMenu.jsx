@@ -10,7 +10,7 @@ const SidebarMenu = () => {
         setIsVisible(!isVisible);
     };
     useEffect(() => {
-        tg.ready();
+        tg?.ready();
     }, []);
 
     const openChannel = () => {

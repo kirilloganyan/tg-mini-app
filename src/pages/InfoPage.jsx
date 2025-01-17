@@ -1,5 +1,5 @@
 import { ButtonWithHover } from "../components/ButtonWithHover";
-import useTelegram from "../hooks/useTelegram.js";
+import {useTelegram} from "../hooks/useTelegram.js";
 
 const InfoPage = () => {
     const tg = useTelegram();
